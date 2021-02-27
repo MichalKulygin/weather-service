@@ -2,9 +2,9 @@ POST http://localhost:8080/addLocation
 Content-Type: application/json
 
 {
-  "city": "Hell",
+  "city": "NY",
   "region": "pomorskie",
   "country": "Polska",
   "lat": 54,
-  "lon": 18.0
+  "lon": -38.0
 }

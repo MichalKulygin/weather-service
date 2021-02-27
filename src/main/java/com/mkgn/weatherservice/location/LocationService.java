@@ -37,10 +37,13 @@ public class LocationService {
         location.setLat(lat);
         location.setLon(lon);
 
-        //TODO
-        //
+/*
         location.setLat_cardinal(Cardinals.NORTH);
         location.setLon_cardinal(Cardinals.EAST);
+*/
+
+        location.setLat_cardinal(lat >= 0 ? Cardinals.NORTH : Cardinals.SOUTH);
+        location.setLon_cardinal(lon >= 0 ? Cardinals.EAST : Cardinals.WEST);
 
         return locationRepository.save(location);
     }

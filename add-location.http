@@ -5,6 +5,6 @@ Content-Type: application/json
   "city": "Hell",
   "region": "pomorskie",
   "country": "Polska",
-  "lat": 91,
+  "lat": 54,
   "lon": 18.0
 }

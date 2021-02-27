@@ -25,12 +25,10 @@ public class LocationService {
             throw new EmptyInputException("Null value not allowed");
         }
 
-        if (lat > NORTH_LIMIT || lat < SOUTH_LIMIT) {
-            throw new CardinalsOutOfRangeException("latitude out of range");
-        }
-        if (lon > EAST_LIMIT || lon > WEST_LIMIT) {
-            throw new CardinalsOutOfRangeException("longitude out of range");
-        }
+        if (lat > NORTH_LIMIT) throw new CardinalsOutOfRangeException("cardinals out of range! latitude to high");
+        if (lat < SOUTH_LIMIT) throw new CardinalsOutOfRangeException("cardinals out of range! latitude to low");
+        if (lon > EAST_LIMIT) throw new CardinalsOutOfRangeException("cardinals out of range! longitude to high");
+        if (lon < WEST_LIMIT) throw new CardinalsOutOfRangeException("cardinals out of range! longitude to low");
 
         Location location = new Location();
         location.setCity(city);

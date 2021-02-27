@@ -1,0 +1,10 @@
+POST http://localhost:8080/addLocation
+Content-Type: application/json
+
+{
+  "city": "Gdansk",
+  "region": "pomorskie",
+  "country": "Polska",
+  "lat": 54.5,
+  "lon": 18.5
+}

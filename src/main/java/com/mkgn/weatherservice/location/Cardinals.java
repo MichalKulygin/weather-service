@@ -1,12 +1,14 @@
 package com.mkgn.weatherservice.location;
 
-public enum LatCardinals {
+public enum Cardinals {
     NORTH("N"),
-    SOUTH("S");
+    SOUTH("S"),
+    EAST("E"),
+    WEST("W");
 
     private String latCardinalFullName;
 
-    LatCardinals(String cardinalFullName) {
+    Cardinals(String cardinalFullName) {
         this.latCardinalFullName = cardinalFullName;
     }
 }

@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class NewLocationResponse { // todo let's try avoid public modifier
+class NewLocationResponse {
+    private UUID id;
     private String city;
     private String region;
     private String country;

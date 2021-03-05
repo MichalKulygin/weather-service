@@ -17,12 +17,13 @@ public class LocationController { // todo let's try avoid public modifier
         String city = request.getCity();
         String region = request.getRegion();
         String country = request.getCountry();
-        Double lat = request.getLat();
-        Double lon = request.getLon();
+        Double lat = request.getLatitude();
+        Double lon = request.getLongitude();
 
         Location location = locationService.createLocation(city, region, country, lat, lon);
 
         NewLocationResponse responseBody = new NewLocationResponse(
+                location.getId(),
                 city,
                 region,
                 country,

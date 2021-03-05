@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateLocationRequest { // todo let's try avoid public modifier
+class CreateLocationRequest {
 
     private String city;
     private String region;
     private String country;
-    private Double lat; // todo use full name
-    private Double lon; // todo use full name
+    private Double latitude;
+    private Double longitude;
 }

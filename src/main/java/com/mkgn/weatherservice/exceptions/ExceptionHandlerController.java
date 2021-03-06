@@ -14,6 +14,9 @@ public class ExceptionHandlerController {
         System.out.println(e.getMessage());
     }
 
-    // todo CardinalsOutOfRangeException will be mapped to InternalServerError - 500 status code
-    //  you have to handle it as well
+    @ExceptionHandler(CardinalsOutOfRangeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleCardinalsOutOfRangeException(CardinalsOutOfRangeException e) {
+        System.out.println(e.getMessage());
+    }
 }

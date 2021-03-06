@@ -4,11 +4,17 @@ public enum Cardinals {
     NORTH("N"),
     SOUTH("S"),
     EAST("E"),
-    WEST("W");
+    WEST("W"),
+    EQUATOR("EQ"),
+    PRIME_MERIDIAN("PM");
 
-    private String latCardinalFullName;
+    private final String cardinalAbbreviation;
 
     Cardinals(String cardinalFullName) {
-        this.latCardinalFullName = cardinalFullName;
+        this.cardinalAbbreviation = cardinalFullName;
+    }
+
+    public String getCardinalAbbreviation() {
+        return cardinalAbbreviation;
     }
 }

@@ -44,11 +44,8 @@ class LocationService {
         location.setCity(city);
         location.setRegion(region);
         location.setCountry(country);
-        location.setLat(lat);
-        location.setLon(lon);
-
-        location.setLat_cardinal(lat >= 0 ? Cardinals.NORTH : Cardinals.SOUTH);
-        location.setLon_cardinal(lon >= 0 ? Cardinals.EAST : Cardinals.WEST);
+        location.setLatitude(lat);
+        location.setLongitude(lon);
 
         return locationRepository.save(location);
     }

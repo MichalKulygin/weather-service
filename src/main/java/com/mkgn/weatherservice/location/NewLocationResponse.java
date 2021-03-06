@@ -9,18 +9,16 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 class NewLocationResponse {
     private UUID id;
     private String city;
     private String region;
     private String country;
-    private Double lat;
-    private Double lon;
-    private String lat_cardinal;
-    private String lon_cardinal;
+    private Double latitude;
+    private Double longitude;
+    private String latitudeCardinal;
+    private String longitudeCardinal;
 
     // todo - model required by frontend
     //  id - number (string for UUID), city - string, region - string, country - string, longitude - string (enum), latitude - string (enum)
-    //  enum - "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
 }

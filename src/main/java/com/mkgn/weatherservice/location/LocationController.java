@@ -8,32 +8,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class LocationController { // todo let's try avoid public modifier
+class LocationController {
     private final LocationService locationService;
 
-    @PostMapping("/addLocation")    // todo no verbs, a post method indicates a verb and intention
+    @PostMapping("/location")
     ResponseEntity<NewLocationResponse> postLocation(@RequestBody CreateLocationRequest request) {
-        // todo under the method signature we don't put newline
         String city = request.getCity();
         String region = request.getRegion();
         String country = request.getCountry();
-        Double lat = request.getLatitude();
-        Double lon = request.getLongitude();
+        Double latitude = request.getLatitude();
+        Double longitude = request.getLongitude();
 
-        Location location = locationService.createLocation(city, region, country, lat, lon);
+        Location location = locationService.createLocation(city, region, country, latitude, longitude);
 
         NewLocationResponse responseBody = new NewLocationResponse(
                 location.getId(),
                 city,
                 region,
                 country,
-                lat,
-                lon,
-                location.getLat_cardinal().name(),
-                location.getLon_cardinal().name());
-
+                latitude,
+                longitude,
+                latitudeCardinal(latitude),
+                longitudeCardinal(longitude));
         return ResponseEntity.status(200).body(responseBody);
-        // todo unnecessary newline
     }
 
+    private String longitudeCardinal(Double longitude) {
+        if (longitude > 0) {
+            return Cardinals.EAST.getCardinalAbbreviation();
+        } else if (longitude < 0) {
+            return Cardinals.WEST.getCardinalAbbreviation();
+        } else {
+            return Cardinals.PRIME_MERIDIAN.getCardinalAbbreviation();
+        }
+    }
+
+    private String latitudeCardinal(Double latitude) {
+        if (latitude > 0) {
+            return Cardinals.NORTH.getCardinalAbbreviation();
+        } else if (latitude < 0) {
+            return Cardinals.SOUTH.getCardinalAbbreviation();
+        } else {
+            return Cardinals.EQUATOR.getCardinalAbbreviation();
+        }
+    }
 }

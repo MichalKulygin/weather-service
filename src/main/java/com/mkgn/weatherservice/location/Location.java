@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location { // todo let's try avoid public modifier
+class Location {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -23,10 +23,10 @@ public class Location { // todo let's try avoid public modifier
     private Double latitude;
     private Double longitude;
 
-    @Enumerated(EnumType.STRING)
-    private Cardinals lat_cardinal; // todo it is unnecessary, you can calculate it based on latitude valueg
-
-    //  lat_cardinal -> latitudeCardinal (full name + camelCase for variables) (UPPER CASE + snake_case for static finals)
-    @Enumerated(EnumType.STRING)
-    private Cardinals lon_cardinal; // todo it is unnecessary, you can calculate it based on longitude value
+//    @Enumerated(EnumType.STRING)
+//    private Cardinals lat_cardinal; // todo it is unnecessary, you can calculate it based on latitude valueg
+//
+//    //  lat_cardinal -> latitudeCardinal (full name + camelCase for variables) (UPPER CASE + snake_case for static finals)
+//    @Enumerated(EnumType.STRING)
+//    private Cardinals lon_cardinal; // todo it is unnecessary, you can calculate it based on longitude value
 }

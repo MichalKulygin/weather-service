@@ -17,11 +17,11 @@ class LocationService {
     private final LocationRepository locationRepository;
 
     Location createLocation(String city, String region, String country, Double lat, Double lon) {
-        if (city.isEmpty()) {
-            throw new EmptyInputException("Null value not allowed");
+        if (city == null || city.isBlank()) {
+            throw new EmptyInputException("Value cannot be empty");
         }
-        if (country.isEmpty()) {
-            throw new EmptyInputException("Null value not allowed");
+        if (country == null || country.isBlank()) {
+            throw new EmptyInputException("Value cannot be empty");
         }
         if (lat > NORTH_LIMIT) {
             throw new CardinalsOutOfRangeException("cardinals out of range! latitude to high");

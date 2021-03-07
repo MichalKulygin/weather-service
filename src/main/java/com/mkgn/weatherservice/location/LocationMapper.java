@@ -6,11 +6,10 @@ import org.springframework.stereotype.Component;
 class LocationMapper {
 
     NewLocationResponse mapLocationToNewLocationResponse(Location location) {
-
         return NewLocationResponse.builder().
                 id(location.getId())
                 .city(location.getCity())
-                .region(location.getCity())
+                .region(location.getRegion())
                 .country(location.getCountry())
                 .latitude(location.getLatitude())
                 .longitude(location.getLongitude())
@@ -38,5 +37,4 @@ class LocationMapper {
             return Cardinals.EQUATOR.getCardinalAbbreviation();
         }
     }
-
 }

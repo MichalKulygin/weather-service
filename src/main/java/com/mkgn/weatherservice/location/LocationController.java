@@ -1,6 +1,7 @@
 package com.mkgn.weatherservice.location;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ class LocationController {
 
         NewLocationResponse responseBody = locationMapper.mapLocationToNewLocationResponse(location);
 
-        return ResponseEntity.status(200).body(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
 }

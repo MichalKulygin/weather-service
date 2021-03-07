@@ -25,14 +25,14 @@ public class LocationServiceTest {
     @Test
     void createLocation_createsNewLocation() {
         //given
-        Location gdynia = Location.builder()
+        Location locationGdynia = Location.builder()
                 .city("Gdynia")
                 .region("pomorskie")
                 .country("Poland")
                 .latitude(54.0)
                 .longitude(18.5)
                 .build();
-        when(locationRepository.save(any())).thenReturn(gdynia);
+        when(locationRepository.save(any())).thenReturn(locationGdynia);
 
         //when
         Location location = locationService.createLocation("city", "region", "Poland", 54.0, 18.5);

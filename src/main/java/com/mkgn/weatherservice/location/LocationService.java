@@ -18,10 +18,10 @@ class LocationService {
 
     Location createLocation(String city, String region, String country, Double lat, Double lon) {
         if (city == null || city.isBlank()) {
-            throw new EmptyInputException("Value cannot be empty");
+            throw new EmptyInputException("City cannot be empty or null");
         }
         if (country == null || country.isBlank()) {
-            throw new EmptyInputException("Value cannot be empty");
+            throw new EmptyInputException("County cannot be empty or null");
         }
         if (lat > NORTH_LIMIT) {
             throw new CardinalsOutOfRangeException("cardinals out of range! latitude to high");

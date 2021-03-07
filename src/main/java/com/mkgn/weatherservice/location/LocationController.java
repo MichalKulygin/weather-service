@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 class LocationController {
     private final LocationService locationService;
+    private final LocationMapper locationMapper;
 
     @PostMapping("/location")
     ResponseEntity<NewLocationResponse> postLocation(@RequestBody CreateLocationRequest request) {
@@ -21,35 +22,9 @@ class LocationController {
 
         Location location = locationService.createLocation(city, region, country, latitude, longitude);
 
-        NewLocationResponse responseBody = new NewLocationResponse(
-                location.getId(),
-                city,
-                region,
-                country,
-                latitude,
-                longitude,
-                latitudeCardinal(latitude),
-                longitudeCardinal(longitude));
+        NewLocationResponse responseBody = locationMapper.mapLocationToNewLocationResponse(location);
+
         return ResponseEntity.status(200).body(responseBody);
     }
 
-    private String longitudeCardinal(Double longitude) {
-        if (longitude > 0) {
-            return Cardinals.EAST.getCardinalAbbreviation();
-        } else if (longitude < 0) {
-            return Cardinals.WEST.getCardinalAbbreviation();
-        } else {
-            return Cardinals.PRIME_MERIDIAN.getCardinalAbbreviation();
-        }
-    }
-
-    private String latitudeCardinal(Double latitude) {
-        if (latitude > 0) {
-            return Cardinals.NORTH.getCardinalAbbreviation();
-        } else if (latitude < 0) {
-            return Cardinals.SOUTH.getCardinalAbbreviation();
-        } else {
-            return Cardinals.EQUATOR.getCardinalAbbreviation();
-        }
-    }
 }

@@ -18,7 +18,6 @@ class Location {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-
     private String id;
     private String city;
     private String region;

@@ -3,6 +3,7 @@ package com.mkgn.weatherservice.location;
 import com.mkgn.weatherservice.exceptions.CardinalsOutOfRangeException;
 import com.mkgn.weatherservice.exceptions.EmptyInputException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,10 +18,10 @@ class LocationService {
     private final LocationRepository locationRepository;
 
     Location createLocation(String city, String region, String country, Double lat, Double lon) {
-        if (city == null || city.isBlank()) {
+        if (StringUtils.isBlank(city)) {
             throw new EmptyInputException("City cannot be empty or null");
         }
-        if (country == null || country.isBlank()) {
+        if (StringUtils.isBlank(country)) {
             throw new EmptyInputException("County cannot be empty or null");
         }
         if (lat > NORTH_LIMIT) {
@@ -36,7 +37,7 @@ class LocationService {
             throw new CardinalsOutOfRangeException("cardinals out of range! longitude to low");
         }
 
-        if (region.equals(" ")) {
+        if (StringUtils.isBlank(region)) {
             region = null;
         }
 

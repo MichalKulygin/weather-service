@@ -14,13 +14,11 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleBadRequestException(EmptyInputException e) {
         log.warn(e.getMessage());
-        System.out.println(e.getMessage());
     }
 
     @ExceptionHandler(CardinalsOutOfRangeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleCardinalsOutOfRangeException(CardinalsOutOfRangeException e) {
         log.warn(e.getMessage());
-        System.out.println(e.getMessage());
     }
 }

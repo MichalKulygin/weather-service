@@ -125,9 +125,4 @@ public class LocationServiceTest {
         assertThat(exception).isInstanceOf(CardinalsOutOfRangeException.class);
         verify(locationRepository, times(0)).save(any());
     }
-
-
-    //TODO how to test empty or null region?
-    //    void createLocation_whenRegionIsEmpty_createsNewLocationWithNullRegion(){}
-    //    void createLocation_whenRegionIsNull_createsNewLocationWithNullRegion(){}
 }

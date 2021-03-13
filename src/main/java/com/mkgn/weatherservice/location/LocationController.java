@@ -25,7 +25,7 @@ class LocationController {
 
         NewLocationResponse responseBody = locationMapper.mapLocationToNewLocationResponse(location);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
+        return ResponseEntity.status(201).body(responseBody);
     }
 
 }

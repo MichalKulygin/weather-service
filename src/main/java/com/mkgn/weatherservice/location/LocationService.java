@@ -17,11 +17,11 @@ class LocationService {
 
     private final LocationRepository locationRepository;
 
-    Location createLocation(String city, String region, String country, Double latitiude, Double longitude) {
+    Location createLocation(String city, String region, String country, Double latitude, Double longitude) {
 
         validateCity(city);
         validateCountry(country);
-        validateLatitude(latitiude);
+        validateLatitude(latitude);
         validateLongitude(longitude);
 
         if (StringUtils.isBlank(region)) {
@@ -32,9 +32,8 @@ class LocationService {
         location.setCity(city);
         location.setRegion(region);
         location.setCountry(country);
-        location.setLatitude(latitiude);
+        location.setLatitude(latitude);
         location.setLongitude(longitude);
-        System.out.println("OK");
         return locationRepository.save(location);
     }
 
@@ -62,7 +61,7 @@ class LocationService {
 
     private void validateLongitude(Double longitude) {
 
-        if (longitude < EAST_LIMIT || longitude > WEST_LIMIT) {
+        if (longitude > EAST_LIMIT || longitude < WEST_LIMIT) {
             if (longitude > EAST_LIMIT) {
                 throw new CardinalsOutOfRangeException("cardinals out of range! longitude to high");
             } else {

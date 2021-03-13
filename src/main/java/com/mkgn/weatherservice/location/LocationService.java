@@ -17,25 +17,12 @@ class LocationService {
 
     private final LocationRepository locationRepository;
 
-    Location createLocation(String city, String region, String country, Double lat, Double lon) {
-        if (StringUtils.isBlank(city)) {
-            throw new EmptyInputException("City cannot be empty or null");
-        }
-        if (StringUtils.isBlank(country)) {
-            throw new EmptyInputException("County cannot be empty or null");
-        }
-        if (lat > NORTH_LIMIT) {
-            throw new CardinalsOutOfRangeException("cardinals out of range! latitude to high");
-        }
-        if (lat < SOUTH_LIMIT) {
-            throw new CardinalsOutOfRangeException("cardinals out of range! latitude to low");
-        }
-        if (lon > EAST_LIMIT) {
-            throw new CardinalsOutOfRangeException("cardinals out of range! longitude to high");
-        }
-        if (lon < WEST_LIMIT) {
-            throw new CardinalsOutOfRangeException("cardinals out of range! longitude to low");
-        }
+    Location createLocation(String city, String region, String country, Double latitiude, Double longitude) {
+
+        validateCity(city);
+        validateCountry(country);
+        validateLatitude(latitiude);
+        validateLongitude(longitude);
 
         if (StringUtils.isBlank(region)) {
             region = null;
@@ -45,9 +32,42 @@ class LocationService {
         location.setCity(city);
         location.setRegion(region);
         location.setCountry(country);
-        location.setLatitude(lat);
-        location.setLongitude(lon);
-
+        location.setLatitude(latitiude);
+        location.setLongitude(longitude);
+        System.out.println("OK");
         return locationRepository.save(location);
+    }
+
+    private void validateCity(String city) {
+        if (StringUtils.isBlank(city)) {
+            throw new EmptyInputException("City cannot be empty or null");
+        }
+    }
+
+    private void validateCountry(String country) {
+        if (StringUtils.isBlank(country)) {
+            throw new EmptyInputException("City cannot be empty or null");
+        }
+    }
+
+    private void validateLatitude(Double latitude) {
+        if (latitude < SOUTH_LIMIT || latitude > NORTH_LIMIT) {
+            if (latitude > NORTH_LIMIT) {
+                throw new CardinalsOutOfRangeException("cardinals out of range! latitude to high");
+            } else {
+                throw new CardinalsOutOfRangeException("cardinals out of range! latitude to low");
+            }
+        }
+    }
+
+    private void validateLongitude(Double longitude) {
+
+        if (longitude < EAST_LIMIT || longitude > WEST_LIMIT) {
+            if (longitude > EAST_LIMIT) {
+                throw new CardinalsOutOfRangeException("cardinals out of range! longitude to high");
+            } else {
+                throw new CardinalsOutOfRangeException("cardinals out of range! longitude to low");
+            }
+        }
     }
 }

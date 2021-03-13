@@ -19,6 +19,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(CardinalsOutOfRangeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleCardinalsOutOfRangeException(CardinalsOutOfRangeException e) {
+        System.out.println(e.getMessage());
         log.warn(e.getMessage());
     }
 }

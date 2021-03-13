@@ -13,28 +13,6 @@ class LocationMapper {
                 .country(location.getCountry())
                 .latitude(location.getLatitude())
                 .longitude(location.getLongitude())
-                .latitudeCardinal(latitudeCardinal(location.getLatitude()))
-                .longitudeCardinal(longitudeCardinal(location.getLongitude()))
                 .build();
-    }
-
-    private String longitudeCardinal(Double longitude) {
-        if (longitude > 0) {
-            return Cardinals.EAST.getCardinalAbbreviation();
-        } else if (longitude < 0) {
-            return Cardinals.WEST.getCardinalAbbreviation();
-        } else {
-            return Cardinals.PRIME_MERIDIAN.getCardinalAbbreviation();
-        }
-    }
-
-    private String latitudeCardinal(Double latitude) {
-        if (latitude > 0) {
-            return Cardinals.NORTH.getCardinalAbbreviation();
-        } else if (latitude < 0) {
-            return Cardinals.SOUTH.getCardinalAbbreviation();
-        } else {
-            return Cardinals.EQUATOR.getCardinalAbbreviation();
-        }
     }
 }

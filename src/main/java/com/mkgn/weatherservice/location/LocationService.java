@@ -19,7 +19,6 @@ class LocationService {
 
     Location createLocation(String city, String region, String country, Double latitude, Double longitude) {
 
-        validateCity(city);
         validateCountry(country);
         validateLatitude(latitude);
         validateLongitude(longitude);
@@ -35,12 +34,6 @@ class LocationService {
         location.setLatitude(latitude);
         location.setLongitude(longitude);
         return locationRepository.save(location);
-    }
-
-    private void validateCity(String city) {
-        if (StringUtils.isBlank(city)) {
-            throw new EmptyInputException("City cannot be empty or null");
-        }
     }
 
     private void validateCountry(String country) {

@@ -1,16 +1,16 @@
 package com.mkgn.weatherservice.location;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import javax.validation.constraints.*;
+
+@Getter
 @Builder
 class CreateLocationRequest {
 
+    @NotBlank(message = "City cannot be null or empty")
+//    @NotNull
     private String city;
     private String region;
     private String country;

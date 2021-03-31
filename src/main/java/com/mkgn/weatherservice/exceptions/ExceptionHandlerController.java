@@ -6,19 +6,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(EmptyInputException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleBadRequestException(EmptyInputException e) {
-        log.warn(e.getMessage());
-    }
-
-    @ExceptionHandler(CardinalsOutOfRangeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleCardinalsOutOfRangeException(CardinalsOutOfRangeException e) {
+    public void handleConstraintViolationException(ConstraintViolationException e) {
         log.warn(e.getMessage());
     }
 }

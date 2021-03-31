@@ -1,16 +1,14 @@
 package com.mkgn.weatherservice.location;
 
-
-import com.mkgn.weatherservice.exceptions.CardinalsOutOfRangeException;
-import com.mkgn.weatherservice.exceptions.EmptyInputException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -21,108 +19,52 @@ public class LocationServiceTest {
     LocationRepository locationRepository;
     @InjectMocks
     LocationService locationService;
+    @Captor
+    ArgumentCaptor<Location> locationArgumentCaptor;
 
     @Test
-    void createLocation_createsNewLocation() {
-        //given
-        Location locationGdynia = Location.builder()
-                .city("Gdynia")
-                .region("pomorskie")
-                .country("Poland")
-                .latitude(54.0)
-                .longitude(18.5)
-                .build();
-        when(locationRepository.save(any())).thenReturn(locationGdynia);
+    void createLocation_thenCreatesNewLocation() {
+        // given
+        when(locationRepository.save(any())).thenReturn(
 
-        //when
-        Location location = locationService.createLocation("city", "region", "Poland", 54.0, 18.5);
-
+                Location.builder()
+                        .city("City")
+                        .region("Region")
+                        .country("Country")
+                        .latitude(54.0)
+                        .longitude(18.0)
+                        .build());
+        // when
+        locationService.createLocation("City", "Region", "Country", 54.0, 18.0);
         //then
-        assertThat(location.getCity()).isEqualTo("Gdynia");
-        assertThat(location.getRegion()).isEqualTo("pomorskie");
-        assertThat(location.getCountry()).isEqualTo("Poland");
-        assertThat(location.getLatitude()).isEqualTo(54.0);
-        assertThat(location.getLongitude()).isEqualTo(18.5);
-        verify(locationRepository).save(any());
+        verify(locationRepository).save(locationArgumentCaptor.capture());
+        assertThat(locationArgumentCaptor.getValue().getCity().equals("City"));
+        assertThat(locationArgumentCaptor.getValue().getRegion().equals("Region"));
+        assertThat(locationArgumentCaptor.getValue().getCountry().equals("Country"));
+        assertThat(locationArgumentCaptor.getValue().getLatitude().equals(54.0));
+        assertThat(locationArgumentCaptor.getValue().getLongitude().equals(18.0));
     }
 
     @Test
-    void createLocation_whenCityIsEmpty_throwsEmptyInputException() {
+    void createLocation_whenRegionIsNull_thenCreatesNewLocation() {
+        // given
+        when(locationRepository.save(any())).thenReturn(
+
+                Location.builder()
+                        .city("City")
+                        .region("")
+                        .country("Country")
+                        .latitude(54.0)
+                        .longitude(18.0)
+                        .build());
         // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation(" ", "pomorskie", "Poland", 54.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(EmptyInputException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenCityIsNull_throwsEmptyInputException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation(null, "pomorskie", "Poland", 54.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(EmptyInputException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenCountyIsEmpty_throwsEmptyInputException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("Tczew", "pomorskie", " ", 54.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(EmptyInputException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenCountyIsNull_throwsEmptyInputException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("Tczew", "pomorskie", null, 54.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(EmptyInputException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenLatitudeIsLowerThenLimit_throwsCardinalOutOfRangeException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("city", "region", "country", -91.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(CardinalsOutOfRangeException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenLatitudeIsHigherThenLimit_throwsCardinalOutOfRangeException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("city", "region", "country", 91.0, 18.0));
-
-        // then
-        assertThat(exception).isInstanceOf(CardinalsOutOfRangeException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenLongitudeIsLowerThenLimit_throwsCardinalOutOfRangeException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("city", "region", "country", 54.0, -181.0));
-
-        // then
-        assertThat(exception).isInstanceOf(CardinalsOutOfRangeException.class);
-        verify(locationRepository, times(0)).save(any());
-    }
-
-    @Test
-    void createLocation_whenLongitudeIsHigherThenLimit_throwsCardinalOutOfRangeException() {
-        // when
-        Throwable exception = catchThrowable(() -> locationService.createLocation("city", "region", "country", 54.0, 181.0));
-
-        // then
-        assertThat(exception).isInstanceOf(CardinalsOutOfRangeException.class);
-        verify(locationRepository, times(0)).save(any());
+        locationService.createLocation("City", "", "Country", 54.0, 18.0);
+        //then
+        verify(locationRepository).save(locationArgumentCaptor.capture());
+        assertThat(locationArgumentCaptor.getValue().getCity().equals("City"));
+        assertThat(locationArgumentCaptor.getValue().getRegion().equals(""));
+        assertThat(locationArgumentCaptor.getValue().getCountry().equals("Country"));
+        assertThat(locationArgumentCaptor.getValue().getLatitude().equals(54.0));
+        assertThat(locationArgumentCaptor.getValue().getLongitude().equals(18.0));
     }
 }

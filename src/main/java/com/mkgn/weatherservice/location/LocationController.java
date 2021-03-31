@@ -30,5 +30,4 @@ class LocationController {
 
         return ResponseEntity.status(201).body(responseBody);
     }
-
 }

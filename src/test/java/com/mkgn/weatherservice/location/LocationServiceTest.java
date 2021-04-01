@@ -38,11 +38,12 @@ public class LocationServiceTest {
         locationService.createLocation("City", "Region", "Country", 54.0, 18.0);
         //then
         verify(locationRepository).save(locationArgumentCaptor.capture());
-        assertThat(locationArgumentCaptor.getValue().getCity().equals("City"));
-        assertThat(locationArgumentCaptor.getValue().getRegion().equals("Region"));
-        assertThat(locationArgumentCaptor.getValue().getCountry().equals("Country"));
-        assertThat(locationArgumentCaptor.getValue().getLatitude().equals(54.0));
-        assertThat(locationArgumentCaptor.getValue().getLongitude().equals(18.0));
+        Location location = locationArgumentCaptor.getValue();
+        assertThat(location.getCity().equals("City"));
+        assertThat(location.getRegion().equals("Region"));
+        assertThat(location.getCountry().equals("Country"));
+        assertThat(location.getLatitude().equals(54.0));
+        assertThat(location.getLongitude().equals(18.0));
     }
 
     @Test
@@ -61,10 +62,11 @@ public class LocationServiceTest {
         locationService.createLocation("City", "", "Country", 54.0, 18.0);
         //then
         verify(locationRepository).save(locationArgumentCaptor.capture());
-        assertThat(locationArgumentCaptor.getValue().getCity().equals("City"));
-        assertThat(locationArgumentCaptor.getValue().getRegion().equals(""));
-        assertThat(locationArgumentCaptor.getValue().getCountry().equals("Country"));
-        assertThat(locationArgumentCaptor.getValue().getLatitude().equals(54.0));
-        assertThat(locationArgumentCaptor.getValue().getLongitude().equals(18.0));
+        Location location = locationArgumentCaptor.getValue();
+        assertThat(location.getCity().equals("City"));
+        assertThat(location.getRegion().equals(""));
+        assertThat(location.getCountry().equals("Country"));
+        assertThat(location.getLatitude().equals(54.0));
+        assertThat(location.getLongitude().equals(18.0));
     }
 }

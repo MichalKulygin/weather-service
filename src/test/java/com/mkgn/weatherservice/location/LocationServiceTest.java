@@ -26,7 +26,6 @@ public class LocationServiceTest {
     void createLocation_thenCreatesNewLocation() {
         // given
         when(locationRepository.save(any())).thenReturn(
-
                 Location.builder()
                         .city("City")
                         .region("Region")
@@ -47,10 +46,9 @@ public class LocationServiceTest {
     }
 
     @Test
-    void createLocation_whenRegionIsNull_thenCreatesNewLocation() {
+    void createLocation_whenRegionIsEmpty_thenCreatesNewLocation() {
         // given
         when(locationRepository.save(any())).thenReturn(
-
                 Location.builder()
                         .city("City")
                         .region("")

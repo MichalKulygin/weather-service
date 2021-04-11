@@ -62,7 +62,7 @@ public class LocationServiceTest {
         verify(locationRepository).save(locationArgumentCaptor.capture());
         Location location = locationArgumentCaptor.getValue();
         assertThat(location.getCity().equals("City"));
-        assertThat(location.getRegion().equals(""));
+        assertThat(location.getRegion() == null);
         assertThat(location.getCountry().equals("Country"));
         assertThat(location.getLatitude().equals(54.0));
         assertThat(location.getLongitude().equals(18.0));

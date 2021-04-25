@@ -1,0 +1,10 @@
+POST http://localhost:8080/location
+Content-Type: application/json
+
+{
+  "city": "Gdynia",
+  "region": " ",
+  "country": "Polska",
+  "latitude": 54.0,
+  "longitude": 18.0
+}
